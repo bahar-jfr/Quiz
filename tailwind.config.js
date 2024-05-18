@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      invert:{
+        "20":"0.2"
+      }
+    },
   },
   plugins: [],
 }
