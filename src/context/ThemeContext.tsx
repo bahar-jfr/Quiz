@@ -5,11 +5,11 @@ type ThemeProviderProps={
     children:ReactNode
 }
 
-type ThemeState={
+export type ThemeState={
     mode:string
 }
 
-type ThemeAction={
+export type ThemeAction={
     type:"CHANGE_THEME",
     payload:string
 }
@@ -19,9 +19,8 @@ export type ThemeContextType={
     themeDispatch:Dispatch<ThemeAction>
 }
 
-
-
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
+const ThemeContext = createContext<ThemeContextType>({  themeState: { mode: "dark" },
+themeDispatch: () => {},})
 
 export const useThemeContext = ()=> useContext(ThemeContext)
 
