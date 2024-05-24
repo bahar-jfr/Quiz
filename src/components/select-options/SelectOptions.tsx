@@ -7,16 +7,44 @@ export function SelectOptions() {
   const { themeState } = useThemeContext();
   const handleCategory = (selected:string) => {
     optionsDispatch({ type: "CHANGE_CATEGORY", payload: selected });
+    if(selected !== "category"){
+      optionsDispatch({type:"IS_CATEGORY_VALID",payload:true})
+    
+      optionsDispatch({
+        type: "SET_CATEGORY_INVALID_MESSAGE",
+        payload: "",
+      });
+    }else{
+      optionsDispatch({type:"IS_CATEGORY_VALID",payload:false})
+    }
   };
 
   const handleDifficulty = (selected:string) => {
     optionsDispatch({ type: "CHANGE_DIFFICULTY", payload: selected });
+    console.log(selected)
+    if(selected !== "difficulty"){
+      optionsDispatch({type:"IS_DIFFICULTY_VALID",payload:true})
+      optionsDispatch({
+        type: "SET_DIFFICULTY_INVALID_MESSAGE",
+        payload: "",
+      });
+    }else{
+      optionsDispatch({type:"IS_DIFFICULTY_VALID",payload:false})
+    }
   };
 
   const handleAmount = (selected:string) => {
     optionsDispatch({ type: "CHANGE_AMOUNT", payload: +selected });
     if (+selected <= 50 && +selected >= 5) {
-      optionsDispatch({type:"IS_VALID",payload:true})
+      optionsDispatch({type:"IS_AMOUNT_VALID",payload:true})
+      
+      // clear the message if change to greater than 5
+      optionsDispatch({
+        type: "SET_AMOUNT_INVALID_MESSAGE",
+        payload: "",
+      });
+    }else{
+      optionsDispatch({type:"IS_AMOUNT_VALID",payload:false})
     }
   };
 
@@ -28,13 +56,10 @@ export function SelectOptions() {
           type="number"
           id="number"
           onChange={(e) => {handleAmount(e.target.value)
-            if (+e.target.value <= 50 && +e.target.value >= 5) {
-              optionsDispatch({type:"IS_VALID",payload:true})
-            }
           } }
           className={`rounded-md py-1.5 px-3.5 outline-none  ${themeState.mode === "dark" ? "bg-dark_select text-dark_text" : "bg-light_select"}`}
         />
-        <p className="text-red-700 text-xs">{optionsState.invalidMessage}</p>
+        <p className="text-red-700 text-xs">{optionsState.invalidMessage.amount}</p>
       </label>
       <label htmlFor="category" className="flex flex-col gap-0.5">
         Category
@@ -44,6 +69,7 @@ export function SelectOptions() {
           <option value="12">Music</option>
           <option value="32">Cartoon & Animations</option>
         </select>
+        <p className="text-red-700 text-xs">{optionsState.invalidMessage.category}</p>
       </label>
       <label htmlFor="difficulty" className="flex flex-col gap-0.5">
         Difficulty
@@ -53,6 +79,7 @@ export function SelectOptions() {
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
+        <p className="text-red-700 text-xs">{optionsState.invalidMessage.difficulty}</p>
       </label>
     </div>
   );
