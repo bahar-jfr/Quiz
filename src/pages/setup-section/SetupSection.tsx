@@ -4,9 +4,9 @@ import { SelectOptions } from "../../components/select-options/SelectOptions";
 import { get } from "../../api/get/get";
 import { useOptionsContext } from "../../context/OptionsContext";
 import { useThemeContext } from "../../context/ThemeContext";
+import { TitleLogo } from "../../components/title-logo/TitleLogo";
 
 export function SetupSection() {
-  const [data, setData] = useState(null);
   const [start, setStart] = useState(false);
   const { optionsState, optionsDispatch } = useOptionsContext();
   const { themeState } = useThemeContext();
@@ -25,7 +25,7 @@ export function SetupSection() {
           optionsState.category,
           optionsState.difficulty
         ).then((res) => {
-          setData(res);
+          
           optionsDispatch({ type: "SET_DATA", payload: res.results });
           setStart(false); // Reset the start state
         });
@@ -35,21 +35,22 @@ export function SetupSection() {
   }, [start, optionsState.valid, optionsDispatch]);
 
   return (
-    <div className={` rounded-md px-24 w-1/2 h-4/5 flex flex-col items-center gap-8 ${
+    <div className={` rounded-md px-24 w-1/2 h-4/5 flex flex-col items-center pt-12 gap-16 ${
       themeState.mode === "dark" ? "bg-dark_main_box text-white"
       : "bg-light_main_box text-light_text"
     }`}>
-      
-      <h1>Setup Quiz</h1>
+      <TitleLogo/>
+     <div className="flex flex-col items-center gap-8 w-full"> <h1 className="text-lg">Setup Quiz</h1>
       
       <SelectOptions />
       <button
         onClick={() => {
           setStart(true);
-        }}
+        }} 
+        className="pt-8"
       >
         start
-      </button>
+      </button></div>
     </div>
   );
 }

@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Permanent Marker";
+  src: url("/src/assets/fonts/Permanent_Marker/PermanentMarker-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Orbitron";
+    src: url("/src/assets/fonts/Orbitron/Orbitron-VariableFont_wght.ttf");
+  }
+
+  @font-face {
+    font-family: "Rowdies";
+    src: url("/src/assets/fonts/Rowdies/Rowdies-Bold.ttf");
+  }
+
+  @font-face {
+    font-family: "Roboto_Flex";
+    src: url("/src/assets/fonts/Roboto_Flex/RobotoFlex-VariableFont_GRAD\,XOPQ\,XTRA\,YOPQ\,YTAS\,YTDE\,YTFI\,YTLC\,YTUC\,opsz\,slnt\,wdth\,wght.ttf");
+  }
+
+*{
+    font-family: "Roboto_Flex";
+    font-weight: 600;
+}
+
+.fontOrbitron{
+    font-family: "Orbitron";
+}
