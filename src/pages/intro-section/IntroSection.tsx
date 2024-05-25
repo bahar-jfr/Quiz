@@ -13,8 +13,8 @@ export function IntroSection() {
     <div
       className={`flex flex-col items-center pt-12 gap-32 rounded-md w-1/2 h-4/5 ${
         themeState.mode === "dark"
-          ? "bg-dark_main_box text-white"
-          : "bg-light_main_box text-light_text"
+          ? "bg-dark_main_box text-white shadow-dark"
+          : "bg-light_main_box text-light_text shadow-light"
       }`}
     >
       <TitleLogo />

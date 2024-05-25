@@ -52,8 +52,8 @@ export function SetupSection() {
     <div
       className={` rounded-md px-24 w-1/2 h-4/5 flex flex-col items-center pt-12 gap-16 ${
         themeState.mode === "dark"
-          ? "bg-dark_main_box text-white"
-          : "bg-light_main_box text-light_text"
+        ? "bg-dark_main_box text-white shadow-dark"
+        : "bg-light_main_box text-light_text shadow-light"
       }`}
     >
       <TitleLogo />
@@ -61,12 +61,10 @@ export function SetupSection() {
         {" "}
         <h1 className="text-lg">Setup Quiz</h1>
         <SelectOptions />
-        <div className="flex flex-col items-center gap-2">
-          <button onClick={() => setStart(true)} className="pt-6 text-xl">
+          <button onClick={() => setStart(true) } className={` text-xl flex flex-col items-center gap-2 ${(!optionsState.valid.amount && !optionsState.valid.category && !optionsState.valid.difficulty) ? "pt-0" : "pt-6"}`}>
             start
+            <IoMdArrowDroprightCircle className="animate-bounce h-6 w-6" />
           </button>
-          <IoMdArrowDroprightCircle className="animate-bounce h-6 w-6" />
-        </div>
       </div>
     </div>
   );
