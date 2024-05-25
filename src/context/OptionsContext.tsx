@@ -44,7 +44,7 @@ const OptionsContext = createContext<OptionsContextType>({
   optionsDispatch: () => {},
 });
 
-const initialOptions = {
+const initialOptions :OptionsState= {
   amount: 0,
   category: "",
   difficulty: "",
@@ -74,11 +74,20 @@ export function optionsReducer(state: OptionsState, action: OptionsAction) {
     case "IS_DIFFICULTY_VALID":
       return { ...state, valid: { difficulty: action.payload } };
     case "SET_AMOUNT_INVALID_MESSAGE":
-      return { ...state, invalidMessage: { amount: action.payload } };
+      return {
+        ...state,
+        invalidMessage: { ...state.invalidMessage, amount: action.payload },
+      };
     case "SET_CATEGORY_INVALID_MESSAGE":
-      return { ...state, invalidMessage: { category: action.payload } };
+      return {
+        ...state,
+        invalidMessage: { ...state.invalidMessage, category: action.payload },
+      };
     case "SET_DIFFICULTY_INVALID_MESSAGE":
-      return { ...state, invalidMessage: { difficulty: action.payload } };
+      return {
+        ...state,
+        invalidMessage: { ...state.invalidMessage, difficulty: action.payload },
+      };
     case "CHANGE_PAGE":
       return { ...state, page: action.payload };
     case "SET_CORRECT_ANSWERS":
@@ -88,11 +97,14 @@ export function optionsReducer(state: OptionsState, action: OptionsAction) {
   }
 }
 
-type ThemeProviderProps = {
+type OptionsProviderProps = {
   children: ReactNode;
 };
-export function OptionsProvider({ children }: ThemeProviderProps) {
-  const [optionsState, optionsDispatch] = useReducer(optionsReducer,initialOptions);
+export function OptionsProvider({ children }: OptionsProviderProps) {
+  const [optionsState, optionsDispatch] = useReducer(
+    optionsReducer,
+    initialOptions
+  );
   return (
     <OptionsContext.Provider value={{ optionsState, optionsDispatch }}>
       {children}
